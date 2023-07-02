@@ -1,6 +1,6 @@
 <script>
   import { PlusIcon } from "svelte-feather-icons";
-  let buttonAction = () => {};
+  export let buttonAction = () => {};
 
   function doAction() {
     buttonAction();

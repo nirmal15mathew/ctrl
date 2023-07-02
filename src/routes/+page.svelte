@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { getLayout } from "../firebase"
+  import { goto } from "$app/navigation"
 
   import Card from "./Card.svelte";
   import SwitchBoard from "./SwitchBoard.svelte";
@@ -8,8 +9,11 @@
 
 	let layout = [];
 
-
 	onMount(async () => layout = await getLayout())
+
+	function roomCreator() {
+		goto('/create/room')
+	}
 </script>
 <svelte:head>
 	<title>Home</title>
@@ -17,7 +21,7 @@
 </svelte:head>
 
 <section class="p-2">
-	<Fab />
+	<Fab buttonAction={() => roomCreator()}/>
 	<div class="flex flex-wrap gap-4 flex-col">
 		{#each layout as el}
 			{#if el['board-type'] == "switch-board"}

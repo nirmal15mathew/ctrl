@@ -27,7 +27,7 @@
       </li>
     {/each}
     <li>
-      <a href="/create/switch">
+      <a href={"/create/switch/"+board_id}>
         <AddSwitchButton />
       </a>
     </li>
