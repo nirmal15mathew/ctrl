@@ -11,5 +11,5 @@
   class="fixed bottom-[4.2rem] right-4 bg-slate-700 text-white p-4 rounded-lg z-20 shadow"
   on:click={doAction}
 >
-  <PlusIcon size="1.7x" />
+  <PlusIcon size="1.3x" />
 </button>

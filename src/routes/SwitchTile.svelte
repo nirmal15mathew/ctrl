@@ -30,10 +30,10 @@
 
 <style>
   .on {
-    @apply bg-slate-500 rounded p-2 text-white transition-colors font-semibold w-20;
+    @apply bg-slate-500 rounded p-2 text-white transition-colors font-semibold w-20 text-ellipsis;
   }
   .off {
-    @apply bg-slate-300 rounded p-2 text-slate-700 transition-colors font-semibold  w-20;
+    @apply bg-slate-300 rounded p-2 text-slate-700 transition-colors font-semibold w-20 text-ellipsis;
   }
 </style>
 

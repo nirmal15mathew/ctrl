@@ -1,12 +1,13 @@
 <script>
   import { fade, fly } from "svelte/transition";
-  import { db } from "../../../../firebase";
+  import { addSwitch, db } from "../../../../firebase";
   import {
-    addDoc,
     query,
     collection,
     where,
     getDocs,
+    doc,
+    updateDoc
   } from "firebase/firestore";
   import { onMount } from "svelte";
   import { page} from "$app/stores"
@@ -28,30 +29,21 @@
       availablePins.push(q_doc)
     })
     availablePins = availablePins
-    console.log(availablePins)
   }
 
   onMount(async () => getAvailablePins("board01"))
 
-  async function addSwitch() {
-    // using setDoc add a new document or use the existing document of switch for editing the
-    // switch for which doc is used. USAGE: doc(db, "app_layout/roomId", "switchId")
-    /**
-     * Parameters are
-     * - icon - none
-     * - label
-     * - mappedBoard - board01
-     * - mappedPin - PIN_NUMBER
-     * - type BINARY / ANALOG
-     */
-    const ref = collection(db, "app_layout/"+$page.params.slug+"/switches")
-    await addDoc(ref, {
-      icon: "none",
-      label: switchLabel,
-      mappedBoard: "board01",
-      mappedPin: pinNumber,
-      type: isDigital ? "BINARY" : "ANALOG",
+  function markAsUsed(boardId, pin) {
+    const ref = doc(db, boardId+"/"+pin)
+    updateDoc(ref, {
+      currently_used: true
     })
+  }
+
+  function createSwitch() {
+    markAsUsed("board01", pinNumber)
+    addSwitch($page.params.slug, switchLabel, pinNumber, isDigital, "board01", "none")
+    const notif = new Notification("Added new switch")
   }
 </script>
 
@@ -94,11 +86,17 @@
     <label for="pins">
       Select Pin
     </label>
-    <input bind:value={pinNumber} />
+    <select>
+      {#each availablePins as pin}
+        <option>
+          {pin.id}
+        </option>
+      {/each}
+    </select>
     
 
     <button
-      on:click={() => addSwitch()}
+      on:click={createSwitch}
       class="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800 my-2"
       >Add New Button</button
     >

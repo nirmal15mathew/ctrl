@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
-import { getFirestore, collection, getDocs, getDoc, doc} from "firebase/firestore"
+import { getFirestore, collection, getDocs, getDoc, doc, addDoc, setDoc} from "firebase/firestore"
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -57,6 +57,30 @@ export async function getServerStatus(server_id) {
   return stats.status
 }
 
-export async function addSwitch() {
+export async function addSwitch(board_id, switchLabel, pinNumber, isDigital, mappedBoard, icon) {
+  // using setDoc add a new document or use the existing document of switch for editing the
+    // switch for which doc is used. USAGE: doc(db, "app_layout/roomId", "switchId")
+    /**
+     * Parameters are
+     * - icon - none
+     * - label
+     * - mappedBoard - board01
+     * - mappedPin - PIN_NUMBER
+     * - type BINARY / ANALOG
+     */
+    const ref = collection(db, "app_layout/"+board_id+"/switches")
+    await addDoc(ref, {
+      icon: icon,
+      label: switchLabel,
+      mappedBoard: mappedBoard,
+      mappedPin: pinNumber,
+      type: isDigital ? "BINARY" : "ANALOG",
+    })
+}
 
+export async function markAsUsed(board_id, pin_number) {
+  const ref = doc(db, board_id+"/"+pin_number)
+  await setDoc(ref, {
+    
+  })
 }
