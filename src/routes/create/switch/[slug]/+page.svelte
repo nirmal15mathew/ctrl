@@ -86,9 +86,9 @@
     <label for="pins">
       Select Pin
     </label>
-    <select>
+    <select bind:value={pinNumber}>
       {#each availablePins as pin}
-        <option>
+        <option value={pin.id}>
           {pin.id}
         </option>
       {/each}

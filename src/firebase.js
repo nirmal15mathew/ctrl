@@ -73,7 +73,7 @@ export async function addSwitch(board_id, switchLabel, pinNumber, isDigital, map
       icon: icon,
       label: switchLabel,
       mappedBoard: mappedBoard,
-      mappedPin: pinNumber,
+      mappedPin: String(pinNumber),
       type: isDigital ? "BINARY" : "ANALOG",
     })
 }
