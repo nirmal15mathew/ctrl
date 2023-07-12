@@ -41,7 +41,7 @@
   }
 
   function createSwitch() {
-    markAsUsed("board01", pinNumber)
+    //markAsUsed("board01", pinNumber)
     addSwitch($page.params.slug, switchLabel, pinNumber, isDigital, "board01", "none")
     const notif = new Notification("Added new switch")
   }

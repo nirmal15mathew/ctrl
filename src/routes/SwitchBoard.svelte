@@ -19,6 +19,7 @@
     const boardRef = doc(db, "app_layout/" + board_id);
     let results = await getDoc(boardRef);
     let data = results.data();
+    console.log(switches)
     board_name = data.room_name;
   });
 
