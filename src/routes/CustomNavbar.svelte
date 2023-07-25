@@ -21,7 +21,7 @@
 
 </script>
 
-<div class="bg-slate-100 px-2 py-4 w-screen shadow">
+<div class="bg-slate-100 px-2 py-4 w-screen shadow bottom-0">
   <!-- Navbar on the bottom -->
   <ul class="flex text-slate-600 w-full justify-around">
     {#each menu as menuOption}

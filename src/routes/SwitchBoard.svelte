@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { db, getSwitches } from "../firebase";
+  import { db, getSwitches, deleteBoard } from "../firebase";
 
   import SwitchTile from "./SwitchTile.svelte";
   import AddSwitchButton from "./AddSwitchButton.svelte";
@@ -22,16 +22,15 @@
     board_name = data.room_name;
   });
 
-  function deleteBoard() {
-    // remove all the switches
-    // delete the document
-    // change the values of currently_used property of all the pins used in this board
+  // function deletes all the switches and delete the board document
+  function deleteBoardLocal() {
+    deleteBoard(board_id)
   }
 </script>
 
-<div class="pb-4 px-2">
+<div class="p-4 bg-slate-100 rounded-lg">
   <!-- Switch Board -->
-  <div class="py-2 flex justify-between">
+  <div class="pb-1 flex justify-between">
     <!-- Board header -->
     <p class="font-bold text-sm text-gray-500">
       {board_name}
@@ -55,7 +54,8 @@
         >
         <!-- Dropdown Menu -->
           <ul>
-            <li class="hover:bg-slate-100 px-4 cursor-pointer" on:click={deleteBoard}>
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <li class="hover:bg-slate-100 px-4 cursor-pointer" on:click={deleteBoardLocal}>
               Delete
             </li>
           </ul>

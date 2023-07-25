@@ -9,7 +9,10 @@
 
 	let layout = [];
 
-	onMount(async () => layout = await getLayout())
+	onMount(async () => {
+		layout = await getLayout()
+		layout.reverse()
+	})
 
 	function roomCreator() {
 		goto('/create/room')

@@ -1,4 +1,4 @@
-<script>
+<script lang="js">
   import { fade, fly } from "svelte/transition";
   import { addSwitch, db } from "../../../../firebase";
   import {
@@ -10,7 +10,8 @@
     updateDoc
   } from "firebase/firestore";
   import { onMount } from "svelte";
-  import { page} from "$app/stores"
+  import { page } from "$app/stores"
+  import { goto } from "$app/navigation"
   
 
   let isDigital;
@@ -43,7 +44,9 @@
   function createSwitch() {
     //markAsUsed("board01", pinNumber)
     addSwitch($page.params.slug, switchLabel, pinNumber, isDigital, "board01", "none")
+    goto("/")
     const notif = new Notification("Added new switch")
+
   }
 </script>
 

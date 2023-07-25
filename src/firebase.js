@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
-import { getFirestore, collection, getDocs, getDoc, doc, addDoc, setDoc} from "firebase/firestore"
+import { getFirestore, collection, getDocs, getDoc, doc, addDoc, setDoc, deleteDoc} from "firebase/firestore"
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -83,4 +83,19 @@ export async function markAsUsed(board_id, pin_number) {
   await setDoc(ref, {
     
   })
+}
+
+// delete all the switches as well as the board
+export async function deleteBoard(board_id) {
+  const ref = collection(db, "app_layout/"+board_id+"/switches")
+  // iterate through the switch collection and delete each switch
+  const switchSnapshot = await getDocs(ref);
+  switchSnapshot.forEach(doc => {
+    deleteDoc(doc.ref)
+  })
+
+  // finally delete the board
+  const boardRef = doc(db, "app_layout/"+board_id)
+  deleteDoc(boardRef)
+
 }

@@ -13,7 +13,7 @@
 		<slot />
 	</main>
 
-	<footer class="bottom-0 fixed">
+	<footer class="fixed bottom-0">
 		<CustomNavbar />
 	</footer>
 </div>
